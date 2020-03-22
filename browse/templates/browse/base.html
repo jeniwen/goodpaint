@@ -1,0 +1,24 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+  <title>Account</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'marketplace/style.css' %}" />
+</head>
+<body>
+<header>
+  <img src="{% static 'common_static/logo.png' %}" />
+</header>
+{% if username %}
+  Hi, {{username}} 
+{% endif %}
+
+
+{% block content %}
+{% endblock %}
+<footer>
+&copy; 2020 GoodNotes++
+</footer>
+</body>
+</html>
+

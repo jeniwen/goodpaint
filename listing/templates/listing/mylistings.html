@@ -1,0 +1,20 @@
+
+{%extends "listing/base.html"%}
+{%block content%}
+
+<h1>Your Listings</h1>
+{% for p in my_listings %}
+<p>
+  <img src="{{p.image.url}}" /><br /> 
+  Author: {{p.owner.username}} | {{p.created}}<br />
+  <h1>{{p.title}}</h2><br /> 
+  Description: {{p.descrip}} <br /> 
+  Medium: {{p.medium}}<br /> 
+  Stock: {{p.stock}}<br /> 
+
+  {% if user.is_authenticated %}
+  <a class="btn btn-default" href="{% url 'listing_edit' pk=p.pk %}">EDIT</a>
+  {% endif %}
+</p>
+{% endfor %}
+{% endblock %}

@@ -14,8 +14,9 @@ class SignupForm(forms.Form):
     )
     
     email = forms.EmailField(
-      validators=[validate_mcgill_email], 
-      error_messages={'not_mcgill': 'mcgill members only'})
+    #   validators=[validate_mcgill_email], 
+    #   error_messages={'not_mcgill': 'mcgill members only'}
+    )
     
     age = forms.IntegerField(required=False)
     password = forms.CharField()

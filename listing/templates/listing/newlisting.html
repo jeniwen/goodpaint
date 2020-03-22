@@ -1,0 +1,32 @@
+{%extends "listing/base.html"%}
+{%block content%}
+
+<form action="" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div>
+    Image: <input type="file" name="image" />
+    {{form.image.errors}}
+  <div>
+  <div>
+    Title: <input type="text" name="title" /><br /> 
+    {%if title%}
+    {{title}} hey
+    {% endif %}
+    {% comment %} Description: <input type="text" name="descrip" /><br />  {% endcomment %}
+    Description: <br /> 
+    <textarea name="descrip" rows="10" cols="30">
+    </textarea>
+
+
+    Medium: <input type="text" name="medium" /><br /> 
+    Dimensions: <input type="text" name="dimensions" /><br /> 
+    Stock: <input type="text" name="stock" /><br /> 
+
+    {{form.descrip.errors}}
+  <div>
+  <input type="submit" />
+</form>
+
+
+
+{%endblock%}

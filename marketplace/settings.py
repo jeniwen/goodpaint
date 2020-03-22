@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'account'
+    'account',
+    'browse',
+    'listing'
 ]
 
 MIDDLEWARE = [
@@ -118,4 +120,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+import os.path
+
+STATIC_ROOT = ''
+
 STATIC_URL = '/static/'
+
+# STATICFILES_DIRS = ( os.path.join('static'), )
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "common_static"),
+    'marketplace/static/',
+]
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/Users/jiawen/Pictures/media'
