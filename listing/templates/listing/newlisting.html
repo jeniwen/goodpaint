@@ -3,26 +3,51 @@
 
 <form action="" method="post" enctype="multipart/form-data">
   {% csrf_token %}
+  {% comment %} {{ form.as_p }} {% endcomment %}
   <div>
     Image: <input type="file" name="image" />
     {{form.image.errors}}
   <div>
   <div>
+  
     Title: <input type="text" name="title" /><br /> 
-    {%if title%}
-    {{title}} hey
-    {% endif %}
+
+    {{form.title.errors}}
+
     {% comment %} Description: <input type="text" name="descrip" /><br />  {% endcomment %}
     Description: <br /> 
     <textarea name="descrip" rows="10" cols="30">
-    </textarea>
-
-
-    Medium: <input type="text" name="medium" /><br /> 
-    Dimensions: <input type="text" name="dimensions" /><br /> 
-    Stock: <input type="text" name="stock" /><br /> 
-
+    </textarea> <br/>
     {{form.descrip.errors}}
+
+
+    Medium: 
+    <select id="medium_select" name="medium">
+      <option value="Oil">Oil Paint</option>
+      <option value="Acrylic">Acrylic Paint</option>
+      <option value="Watercolour">Watercolour</option>
+      <option value="Digital (Print)">Digital (Print)</option>
+      <option value="Pencil Crayon">Pencil Crayon</option>
+      <option value="Gouache">Gouache</option>
+      <option value="Pen and Ink">Pen and Ink</option>
+    </select>
+    {{form.medium.errors}}
+    
+    <br /> 
+    Dimensions: <input type="text" name="dimensions1" /> x <input type="text" name="dimensions2" />
+    <select id="unit_select" name="unit">
+      <option value="cm">cm</option>
+      <option value="inches">inches</option>
+    </select>
+    {{form.dimensions1.errors}}
+    {{form.dimensions2.errors}}
+    {{form.unit.errors}}
+    <br /> 
+    Price: <input type="text" name="price" /><br /> 
+    {{form.price.errors}}
+    Stock: <input type="text" name="stock" /><br /> 
+    {{form.stock.errors}}
+
   <div>
   <input type="submit" />
 </form>

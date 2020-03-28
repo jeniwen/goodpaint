@@ -1,12 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-def validate_mcgill_email(value):
-    if not value.endswith('mcgill.ca'):
-        raise ValidationError(
-            'Email not from mcgill domain',
-            code = 'not_mcgill'
-        )
+
 
 class SignupForm(forms.Form):
     username = forms.CharField( 

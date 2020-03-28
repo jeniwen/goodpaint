@@ -1,0 +1,32 @@
+{%extends "listing/base.html"%}
+{%block content%}
+
+{% for p in my_listings %}
+<img src="{{p.image.url}}" /><br /> 
+{% endfor %}
+
+<h2> Edit your listing </h2>
+
+<form action="" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+   {% comment %} <div>
+    Image: <input type="file" name="image" />
+    {{form.image.errors}}
+    <div> {% endcomment %}
+  Title: <input type="text" name="title" value={{listing.title}} /><br /> 
+    {{form.title.errors}}
+  Description: <input type="text" name="descrip" value={{listing.descrip}} /><br />
+    {{form.descrip.errors}} 
+  Price: <input type="text" name="price" /><br /> 
+    {{form.price.errors}}
+  Stock: <input type="text" name="stock" value={{listing.stock}} /><br /> 
+    {{form.stock.errors}}
+<input type="submit" />
+  
+
+  
+</form>
+
+
+
+{%endblock%}

@@ -3,17 +3,22 @@
 {%block content%}
 
 <h1>Your Listings</h1>
+<a type="button" href='newlisting' class="btn btn-primary btn-block btn-success">New Listing</a>
 {% for p in my_listings %}
 <p>
   <img src="{{p.image.url}}" /><br /> 
   Author: {{p.owner.username}} | {{p.created}}<br />
-  <h1>{{p.title}}</h2><br /> 
+  <h1>{{p.title}}</h2>
   Description: {{p.descrip}} <br /> 
   Medium: {{p.medium}}<br /> 
-  Stock: {{p.stock}}<br /> 
+  Stock: {{p.stock}}<br />
+  Price: ${{p.price}} <br/>
 
   {% if user.is_authenticated %}
-  <a class="btn btn-default" href="{% url 'listing_edit' pk=p.pk %}">EDIT</a>
+  {% comment %} <a class="btn btn-default" href="{% url 'listing_edit' pk=p.pk %}">EDIT</a> {% endcomment %}
+  <a type="button" class="btn btn-warning" href="{% url 'listing_edit' pk=p.pk %}">EDIT</a>
+  <a type="button" class="btn btn-danger" href="{% url 'listing_delete' pk=p.pk %}">DELETE</a>
+
   {% endif %}
 </p>
 {% endfor %}

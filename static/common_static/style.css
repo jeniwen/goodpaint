@@ -5,4 +5,8 @@ header img {
 img {
   max-width:256px;
 }
-   
+
+.cartthumbnail {
+  max-width:16px;
+}
+

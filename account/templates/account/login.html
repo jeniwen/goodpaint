@@ -1,3 +1,5 @@
+{% extends 'listing/base.html' %}
+{% block content %}
 <h1>Login</h1>
 <div>{{ form.non_field_errors }}</div>
 <form action="" method="post">
@@ -13,4 +15,5 @@
       <input type="submit" value="Login" />
     </p>
 </form>
+{% endblock %}
 

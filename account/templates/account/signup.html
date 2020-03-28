@@ -1,3 +1,5 @@
+{% extends 'listing/base.html' %}
+{% block content %}
 <h1>Create User</h1>
 <form action="" method="post">
     {% csrf_token %}
@@ -26,3 +28,4 @@
     </p>
 </form>
 
+{% endblock %}

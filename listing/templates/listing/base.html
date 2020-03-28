@@ -1,21 +1,34 @@
 {% load static %}
 <!doctype html>
 <html>
+<div class="container" id="maincontainer">
+
 <head>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <title>Account</title>
   <link rel="stylesheet" type="text/css" href="{% static 'common_static/style.css' %}" />
 </head>
 <body>
 <header>
-  <img src="{% static 'common_static/logo.png' %}" />
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <img src="{% static 'common_static/logo.png' %}" />
+  </nav>
 </header>
 
 
 {% block content %}
 {% endblock %}
 
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 </body>
-<footer>
-    &copy; 2020 GoodNotes++
+<footer class = "pt-4 my-md-5 pt-md-5 border-top">
+    &copy; 2020 goodpaint
 </footer>
+
+</div>
 </html>

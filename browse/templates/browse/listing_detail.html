@@ -1,0 +1,36 @@
+{% extends 'listing/base.html' %}
+
+{%block content%}
+{% load static %}
+<!doctype html>
+<html>
+<head>
+  
+</head>
+<body>
+  {% if listing %}
+    <img src="{{listing.image.url}}" /><br /> 
+    Author: {{listing.owner.username}} | {{listing.created}}<br />
+    <h1>{{listing.title}}</h2>
+    Description: {{lsiting.descrip}} <br /> 
+    Medium: {{listing.medium}}<br />
+    Dimensions:  {{listing.dimensions1}} x  {{listing.dimensions2}}  {{listing.unit}} <br/>
+    Stock: {{listing.stock}}<br /> 
+    {% comment %} <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      Quantity: <input type="" name="quantity" content="0"/><br /> 
+      <input type="submit" />
+    </form> {% endcomment %}
+    {%if out_of_stock%}
+      <button type="button" class="btn btn-secondary" disabled><i>Out of Stock</i></button>
+    {% else %}
+      <a type="button" class="btn btn-success" href="{% url 'shopping_cart:addtocart' pk=listing.pk %}">Add to Cart</a>
+    {%endif%}
+
+    {% comment %} <a type="button" class="btn btn-primary" href="{% url 'shopping_cart:addtocart' pk=listing.pk %}">Add to Cart</a> {% endcomment %}
+
+  {% endif %}
+</body>
+{% endblock %}
+
+

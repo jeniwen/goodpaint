@@ -1,24 +1,25 @@
+{% extends 'listing/base.html' %}
+
+{%block content%}
 {% load static %}
 <!doctype html>
 <html>
-<head>
-  <title>Account</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'marketplace/style.css' %}" />
-</head>
 <body>
-<header>
-  <img src="{% static 'common_static/logo.png' %}" />
-</header>
+  <a type="button" href='/listing/newlisting' class="btn btn-primary btn-block btn-success">New Listing</a>
+  {% for p in all_listings %}
+    <a href="{% url 'listing_detail' pk=p.pk %}"><img src="{{p.image.url}}" /></a><br /> 
+    <a href="{% url 'listing_detail' pk=p.pk %}"><h1 >{{p.title}}</h2></a>
+    Artist: {{p.owner.username}} | {{p.created}}<br />
+    <a type="button" class="btn btn-info" href="{% url 'listing_detail' pk=p.pk %}">View Details</a><br/>
+
+
+  {% endfor %}
+</body>
+
+
 {% if username %}
   Hi, {{username}} 
 {% endif %}
-
-
-{% block content %}
 {% endblock %}
-<footer>
-&copy; 2020 GoodNotes++
-</footer>
-</body>
-</html>
+
 
