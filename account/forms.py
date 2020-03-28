@@ -13,7 +13,6 @@ class SignupForm(forms.Form):
     #   error_messages={'not_mcgill': 'mcgill members only'}
     )
     
-    age = forms.IntegerField(required=False)
     password = forms.CharField()
     password_confirm = forms.CharField()
     

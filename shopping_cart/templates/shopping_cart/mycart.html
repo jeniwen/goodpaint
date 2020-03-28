@@ -7,6 +7,7 @@
 {% for i in user_order %}
 <li class="list-group-item">
   <img src="{{i.product.image.url}}" class="rounded float-left cartthumbnail" />
+
   <h1>{{i.product.title}}</h1>
   Added {{i.date_added}}<br/>
 
@@ -15,6 +16,10 @@
 </li>
 {% endfor %}
 </ul>
-Total: {{total}} CAD
+Total: {{total}} CAD <br/>
 
+<a type="button" class="btn btn-warning" href="{% url 'payment:pay'%}">Checkout Now</a>
+{% if order_num %}
+  Order # {{order_num}} <br/>
+{% endif %}
 {% endblock %}

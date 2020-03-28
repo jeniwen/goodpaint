@@ -12,7 +12,7 @@
     <img src="{{listing.image.url}}" /><br /> 
     Author: {{listing.owner.username}} | {{listing.created}}<br />
     <h1>{{listing.title}}</h2>
-    Description: {{lsiting.descrip}} <br /> 
+    Description: {{listing.descrip}} <br /> 
     Medium: {{listing.medium}}<br />
     Dimensions:  {{listing.dimensions1}} x  {{listing.dimensions2}}  {{listing.unit}} <br/>
     Stock: {{listing.stock}}<br /> 
@@ -21,14 +21,15 @@
       Quantity: <input type="" name="quantity" content="0"/><br /> 
       <input type="submit" />
     </form> {% endcomment %}
-    {%if out_of_stock%}
-      <button type="button" class="btn btn-secondary" disabled><i>Out of Stock</i></button>
+    {%if user.is_authenticated %}
+      {%if out_of_stock%}
+        <button type="button" class="btn btn-secondary" disabled><i>Out of Stock</i></button>
+      {% else %}
+        <a type="button" class="btn btn-success" href="{% url 'shopping_cart:addtocart' pk=listing.pk %}">Add to Cart</a>
+      {%endif%}
     {% else %}
-      <a type="button" class="btn btn-success" href="{% url 'shopping_cart:addtocart' pk=listing.pk %}">Add to Cart</a>
-    {%endif%}
-
-    {% comment %} <a type="button" class="btn btn-primary" href="{% url 'shopping_cart:addtocart' pk=listing.pk %}">Add to Cart</a> {% endcomment %}
-
+      <a type="button" class="btn btn-warning" href="{% url 'account:login' %}">Login to add to cart</a>
+    {% endif %}
   {% endif %}
 </body>
 {% endblock %}

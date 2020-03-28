@@ -19,6 +19,7 @@ def showcart(request):
     user_order, status = Order.objects.get_or_create(owner=user, is_ordered=False)
     context['user_order'] = user_order.items.all()
     context['total'] = user_order.get_cart_total()
+    context['order_num'] = user_order.ref_code
     context['user'] = request.user
 
     return render(request, 'shopping_cart/mycart.html', context)
@@ -43,7 +44,7 @@ def addtocart(request, pk):
         user_order, status = Order.objects.get_or_create(owner=user, is_ordered=False)
         user_order.items.add(order_item)
         print(user_order.get_cart_total())
-        if status:
+        if status or user_order.ref_code == '' or user_order.ref_code is None: #
             user_order.ref_code = generate_order_id()
             user_order.save()
         print('Items added.')

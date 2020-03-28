@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.models import User
@@ -21,7 +22,7 @@ def signup(request):
                 form.cleaned_data['username'], 
                 email=form.cleaned_data['email'], 
                 password=form.cleaned_data['password'])
-              return HttpResponseRedirect(reverse('login'))
+              return redirect('account:login')
             except IntegrityError:
                 form.add_error('username', 'Username is taken')
 
@@ -40,7 +41,8 @@ def do_login(request):
                 login(request, user)
                 if 'next' in request.GET:
                     return HttpResponseRedirect(request.GET['next'])
-                return HttpResponseRedirect(reverse('acc_info'))
+                return redirect('browse')
+
             else:
                 form.add_error(None, 'Unable to log in')
         context['form'] = form
@@ -48,5 +50,5 @@ def do_login(request):
 
 def do_logout(request):
     logout(request)
-    return HttpResponseRedirect(reverse('login'))
+    return redirect('account:login')
     
