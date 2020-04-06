@@ -2,6 +2,33 @@
 {%block content%}
 
 <form action="" method="post" enctype="multipart/form-data">
+
+Subtotal: $ {{ order.get_cart_total|floatformat:"2" }} <br/>
+Tax: $ {{ order.get_tax_total|floatformat:"2" }} <br/>
+Grand total: $ {{ order.get_grand_total|floatformat:"2" }} <br/>
+{% csrf_token %}
+<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="{{ key }}"
+    data-description="Total"
+    data-amount=int(round({{ amt }}*100))
+    data-locale="auto">
+</script>
+</form>
+
+<form action="" method="post" id="payment-form">
+  <div class="form-row">
+    <label for="card-element">
+      Credit or debit card
+    </label>
+    <div id="card-element">
+      <!-- A Stripe Element will be inserted here. -->
+    </div>
+
+    <!-- Used to display form errors. -->
+    <div id="card-errors" role="alert"></div>
+  </div>
+
+  <button>Submit Payment</button>
 </form>
 
 {%endblock%}

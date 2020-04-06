@@ -8,6 +8,9 @@ import random
 import string
 from datetime import date
 import datetime
+import decimal
+
+tax_rate = 0.15
 
 def generate_order_id():
     date_str = date.today().strftime('%Y%m%d')[2:] + str(datetime.datetime.now().second)
@@ -35,6 +38,12 @@ class Order(models.Model):
 
     def get_cart_total(self):
         return sum([item.product.price for item in self.items.all()])
+
+    def get_tax_total(self):
+        return float(self.get_cart_total())*tax_rate
+
+    def get_grand_total(self):
+        return float(self.get_cart_total())*(1+tax_rate)
 
     def __str__(self):
         return '{0} - {1}'.format(self.owner, self.ref_code)

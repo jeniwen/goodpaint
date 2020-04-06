@@ -1,16 +1,12 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-
-
 class SignupForm(forms.Form):
     username = forms.CharField( 
       # error_messages={'required': 'Gotta make a username!'}
     )
     
     email = forms.EmailField(
-    #   validators=[validate_mcgill_email], 
-    #   error_messages={'not_mcgill': 'mcgill members only'}
     )
     
     password = forms.CharField()

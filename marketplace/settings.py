@@ -137,3 +137,8 @@ STATICFILES_DIRS = [
 ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/Users/jiawen/Pictures/media'
+
+
+
+STRIPE_SECRET_KEY = 'sk_test_Sq2YIidJbajZcET976OJ5Whc00yoOIu5j1'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_QUCczclxvrFQLkxzedpRqs1T00VFOIDDwu'

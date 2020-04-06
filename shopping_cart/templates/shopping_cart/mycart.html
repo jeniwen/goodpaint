@@ -17,9 +17,11 @@
 {% endfor %}
 </ul>
 Total: {{total}} CAD <br/>
-
-<a type="button" class="btn btn-warning" href="{% url 'payment:pay'%}">Checkout Now</a>
 {% if order_num %}
+<a type="button" class="btn btn-warning" href="{% url 'payment:getaddress'%}">Checkout Now</a>
+
   Order # {{order_num}} <br/>
+{% else %}
+Your cart is looking empty :(
 {% endif %}
 {% endblock %}

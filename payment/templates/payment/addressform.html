@@ -1,0 +1,21 @@
+{%extends "listing/base.html"%}
+{%block content%}
+
+<form action="" method="post" enctype="multipart/form-data">
+
+Subtotal: $ {{ order.get_cart_total|floatformat:"2" }} <br/>
+Tax: $ {{ order.get_tax_total|floatformat:"2" }} <br/>
+Grand total: $ {{ order.get_grand_total|floatformat:"2" }} <br/>
+{% csrf_token %}
+{% for field in form.visible_fields %}
+<div class="form-group">
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+    </div>
+</div>
+{% endfor %}
+<input type="submit" value="Submit">
+</form>
+
+{%endblock%}
