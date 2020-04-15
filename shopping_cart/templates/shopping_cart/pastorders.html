@@ -1,0 +1,19 @@
+
+{%extends "listing/base.html"%}
+{%block content%}
+
+{% for ord in dict.values %}
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Order #{{ord.ref_code}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Ordered on: {{ord.order_date}}</h6>
+    <p class="card-text">Paid: ${{ord.total|floatformat:"2"}} for {{ord.num_items}} item(s) </p>
+
+    <a href="{% url 'shopping_cart:pastorders_view' ref_code=ord.ref_code %}" class="btn btn-info">View Order Details</a>
+  </div>
+</div>
+<br/>
+{% endfor %}
+
+{% endblock %}

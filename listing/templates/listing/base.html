@@ -25,17 +25,15 @@
         <a class="nav-link" href="{% url 'shopping_cart:mycart' %}">My Cart</a>
       </li>
       {% endif %}
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
+
       {% if user.is_authenticated %}
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {{ request.user }}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+
+          <a class="dropdown-item" href="/shopping_cart/pastorders">My Orders</a>
           <a class="dropdown-item" href="{% url 'account:logout' %}">Logout</a>
 
         </div>

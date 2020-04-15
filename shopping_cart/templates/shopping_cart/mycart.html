@@ -2,7 +2,12 @@
 {%extends "listing/base.html"%}
 {%block content%}
 
+{% if currentcart %}
 <h1>{{user}}'s Cart</h1>
+{% else %}
+<h1>{{user}}'s Order #{{order_num}}</h1>
+{% endif %}
+
 <ul class="list-group">
 {% for i in user_order %}
 <li class="list-group-item">
@@ -12,15 +17,20 @@
   Added {{i.date_added}}<br/>
 
   Price: ${{i.product.price}} <br/>
+  {% if currentcart %}
   <a type="button" class="btn btn-danger" href="{% url 'shopping_cart:deletefromcart' pk=i.pk %}">Delete From Cart</a>
+  {% endif %}
 </li>
 {% endfor %}
 </ul>
 Total: {{total}} CAD <br/>
 {% if order_num %}
+
+{% if currentcart %}
 <a type="button" class="btn btn-warning" href="{% url 'payment:getaddress'%}">Checkout Now</a>
 
   Order # {{order_num}} <br/>
+  {% endif %}
 {% else %}
 Your cart is looking empty :(
 {% endif %}

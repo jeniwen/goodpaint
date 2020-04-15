@@ -35,6 +35,9 @@ class Order(models.Model):
 
     def get_cart_items(self):
         return self.items.all()
+    
+    def get_cart_num_items(self):
+        return len(self.items.all())
 
     def get_cart_total(self):
         return sum([item.product.price for item in self.items.all()])

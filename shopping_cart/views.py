@@ -21,12 +21,47 @@ def showcart(request):
     context['total'] = user_order.get_cart_total()
     context['order_num'] = user_order.ref_code
     context['user'] = request.user
+    context['currentcart'] = False
 
     return render(request, 'shopping_cart/mycart.html', context)
 
 @login_required
+def pastorders_view(request, ref_code):
+    context = {}
+    user = get_object_or_404(User, username=request.user)
+    user_order = get_object_or_404(Order, owner=user, ref_code=ref_code)
+    context['user_order'] = user_order.items.all()
+    context['total'] = user_order.get_cart_total()
+    context['order_num'] = user_order.ref_code
+    context['user'] = request.user
+    
+    return render(request, 'shopping_cart/mycart.html', context)
+
+@login_required
+def pastorders(request):
+    context = {}
+    user = get_object_or_404(User, username=request.user)
+    user_orders = Order.objects.filter(owner=user, is_ordered=True).order_by('-date_ordered')
+
+    orders_dict = {}
+    # queryset = queryset.order_by('-id')
+    for ord in user_orders:
+        # print(ord)
+        order_info = {}
+        order_info['ref_code'] = ord.ref_code
+        order_info['total'] = ord.get_grand_total()
+        order_info['order_date'] = ord.date_ordered
+        order_info['num_items'] = ord.get_cart_num_items()
+        orders_dict[ord.ref_code] = order_info
+    context['dict'] = orders_dict
+
+    return render(request, 'shopping_cart/pastorders.html', context)
+
+
+@login_required
 def addtocart(request, pk):
     context = {}
+    
     # print('hello ' + str(request.session['quantity']) + " " + str(pk))
 
     #Start building OrderItem
@@ -76,3 +111,6 @@ def deletefromcart(request, pk):
     context['user_order'] = user_order.items.all()
     context['total'] = user_order.get_cart_total()
     return redirect('/shopping_cart/')
+
+
+
