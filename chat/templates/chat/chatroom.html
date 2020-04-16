@@ -1,0 +1,67 @@
+{%extends "listing/base.html"%}
+{%block content%}
+<body>
+    <div id="chat-history" style="height:450px" class="overflow-auto" >
+    </div>
+    {% comment %} <textarea id="chat-log" cols="100" rows="20" readonly></textarea><br/> {% endcomment %}
+    <input id="chat-message-input" type="text" size="100"/><br/>
+    <input id="chat-message-submit" type="button" value="Send"/>
+
+</body>
+
+<script>
+    var roomName = "{{ room_name }}";
+    console.log('ws://' + window.location.host + '/ws/chat/' + roomName + '/')
+    var chatSocket = new WebSocket(
+        'ws://' + window.location.host + '/ws/chat/' + roomName + '/');
+
+   chatSocket.onmessage = function(e) {
+        var data = JSON.parse(e.data);
+        var message = data['message'];
+        var timestamp = data['timestamp'];
+        var handle = data['handle'];
+
+        //document.getElementById('chat-log').value += (message + '<br/>\n' + timestamp+ '\n');
+        /*var divstring = ""
+        if (handle.equals("{{room_name}}")) {
+            divstring = '<div class="card text-white bg-primary"><div class="card-body"><div class="row">'
+        } else {
+            divstring = '<div class="card text-white bg-primary"><div class="card-body"><div class="row">'
+        }*/
+       $("#chat-history").append('<div class="container"><div class="row">'
+       +'<div align="right" class="col my-auto">' + handle + '</div>'
+       + '<div class="card text-white bg-primary col-md-10"><div class="card-body">'
+            + '<div class="col ml-auto">' + message + '</div>' 
+        + '</div></div>' 
+        +'</div></div>'
+        + '<div align="right"><small>' + timestamp + '</small></div></br>');
+
+        $("#chat-history").scrollTop($("#chat-history")[0].scrollHeight);
+    };
+
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+    document.getElementById('chat-message-input').focus();
+    document.getElementById('chat-message-input').onkeyup = function(e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.getElementById('chat-message-submit').click();
+        }
+    };
+
+    document.getElementById('chat-message-submit').onclick = function(e) {
+        var messageInputDom = document.getElementById('chat-message-input');
+        var message = messageInputDom.value;
+        let current_datetime = new Date()
+        let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds()
+        chatSocket.send(JSON.stringify({
+            'message': message,
+            //'timestamp' : formatted_date,
+            'username' : "{{username}}"
+        }));
+
+        messageInputDom.value = '';
+    };
+</script>
+{%endblock%}

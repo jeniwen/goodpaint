@@ -21,7 +21,7 @@ def showcart(request):
     context['total'] = user_order.get_cart_total()
     context['order_num'] = user_order.ref_code
     context['user'] = request.user
-    context['currentcart'] = False
+    context['currentcart'] = True
 
     return render(request, 'shopping_cart/mycart.html', context)
 

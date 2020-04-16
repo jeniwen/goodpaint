@@ -8,6 +8,7 @@
   
 </head>
 <body>
+<div class="jumbotron">
   {% if listing %}
     <img src="{{listing.image.url}}" /><br /> 
     Author: {{listing.owner.username}} | {{listing.created}}<br />
@@ -16,6 +17,7 @@
     Medium: {{listing.medium}}<br />
     Dimensions:  {{listing.dimensions1}} x  {{listing.dimensions2}}  {{listing.unit}} <br/>
     Stock: {{listing.stock}}<br /> 
+    <h5>Price {{listing.price}}</h5>
     {% comment %} <form action="" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       Quantity: <input type="" name="quantity" content="0"/><br /> 
@@ -31,6 +33,7 @@
       <a type="button" class="btn btn-warning" href="{% url 'account:login' %}">Login to add to cart</a>
     {% endif %}
   {% endif %}
+  </div>
 </body>
 {% endblock %}
 

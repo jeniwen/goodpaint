@@ -11,15 +11,24 @@
 <ul class="list-group">
 {% for i in user_order %}
 <li class="list-group-item">
-  <img src="{{i.product.image.url}}" class="rounded float-left cartthumbnail" />
-
+<div class="container">
+<div class="row">
+  <div class="col-sm-2">
+  <img src="{{i.product.image.url}}" class = "img-responsive" width = "100%" />
+  </div>
+  <div class="col">
   <h1>{{i.product.title}}</h1>
   Added {{i.date_added}}<br/>
-
   Price: ${{i.product.price}} <br/>
+  </div>
+  
   {% if currentcart %}
+  <div class="col my-auto">
   <a type="button" class="btn btn-danger" href="{% url 'shopping_cart:deletefromcart' pk=i.pk %}">Delete From Cart</a>
+  </div>
   {% endif %}
+<div class="row">
+</div>
 </li>
 {% endfor %}
 </ul>
