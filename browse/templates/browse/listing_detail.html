@@ -9,8 +9,14 @@
 </head>
 <body>
 <div class="jumbotron">
+  <div class="container">
+  <div class="row">
+
   {% if listing %}
-    <img src="{{listing.image.url}}" /><br /> 
+  <div class="col">
+    <img src="{{listing.image.url}}" class="img-fluid" />
+  </div>
+  <div class="col-6">
     Author: {{listing.owner.username}} | {{listing.created}}<br />
     <h1>{{listing.title}}</h2>
     Description: {{listing.descrip}} <br /> 
@@ -28,11 +34,15 @@
         <button type="button" class="btn btn-secondary" disabled><i>Out of Stock</i></button>
       {% else %}
         <a type="button" class="btn btn-success" href="{% url 'shopping_cart:addtocart' pk=listing.pk %}">Add to Cart</a>
+        <a type="button" class="btn btn-info" href="{% url 'chat:chatroom' user=listing.owner.username%}">Message Artist</a>
       {%endif%}
     {% else %}
-      <a type="button" class="btn btn-warning" href="{% url 'account:login' %}">Login to add to cart</a>
+      <a type="button" class="btn btn-success" href="{% url 'account:login' %}">Login to add to cart</a>
     {% endif %}
+    </div>
   {% endif %}
+  </div>
+  </div> 
   </div>
 </body>
 {% endblock %}

@@ -12,7 +12,7 @@
   {% for p in all_listings %}
     <div class="card">
     
-    <img class="card-img-top" style="object-fit:cover width:100% height:15vw;" src="{{p.image.url}}" />
+    <img class="card-img-top img-fluid" style="object-fit:cover width:100% height:15vw;" src="{{p.image.url}}" />
 
     <div class="card-body">
     <a href="{% url 'listing_detail' pk=p.pk %}"><h5 class="card-title">{{p.title}}</h5></a>

@@ -36,7 +36,7 @@
           {{ request.user }}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="/shopping_cart/pastorders">New Listing</a>
+          <a class="dropdown-item" href="/listing/newlisting">New Listing</a>
           <a class="dropdown-item" href="/listing/mylistings">My Listings</a>
           <a class="dropdown-item" href="/shopping_cart/pastorders">My Orders</a>
           <a class="dropdown-item" href="{% url 'account:logout' %}">Logout</a>
@@ -46,9 +46,10 @@
         {% else %}
           
           <li class="nav-item">
-          <button type="button" class="btn btn-outline-success">
           <a class="nav-link" href="{% url 'account:login' %}">Login</a>
-          </button>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'account:signup' %}">Signup</a>
           </li>
           
         {% endif %}

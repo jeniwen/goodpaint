@@ -18,7 +18,7 @@ def generate_order_id():
     return date_str + rand_str
 
 class OrderItem(models.Model):
-    product = models.ForeignKey(Listing, on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(Listing, on_delete=models.CASCADE)
     is_ordered = models.BooleanField(default=False)
     date_added = models.DateTimeField(auto_now=True)
     date_ordered = models.DateTimeField(null=True)

@@ -17,11 +17,15 @@ def showcart(request):
     context = {}
     user = get_object_or_404(User, username=request.user)
     user_order, status = Order.objects.get_or_create(owner=user, is_ordered=False)
-    context['user_order'] = user_order.items.all()
-    context['total'] = user_order.get_cart_total()
-    context['order_num'] = user_order.ref_code
-    context['user'] = request.user
-    context['currentcart'] = True
+    if status or user_order.ref_code == '' or user_order.ref_code is None: #
+        user_order.ref_code = generate_order_id()
+        user_order.save()
+    if not status:
+        context['user_order'] = user_order.items.all()
+        context['total'] = user_order.get_cart_total()
+        context['order_num'] = user_order.ref_code
+        context['user'] = request.user
+        context['currentcart'] = True
 
     return render(request, 'shopping_cart/mycart.html', context)
 

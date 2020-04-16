@@ -57,10 +57,11 @@ class ChatConsumer(WebsocketConsumer):
         # message = handle + message
          #save message to messages
         m = Message(room=room, handle=handle, message=message)
-        print(m.message)
         print(str(m.timestamp.strftime("%Y-%m-%d %H:%M:%S")))
-        # m.save()
         eastern = timezone('US/Eastern')
+        m.timestamp = m.timestamp.astimezone(eastern)
+        m.save()
+
         # Send message to room group
         async_to_sync(self.channel_layer.group_send)(
             self.room_group_name,

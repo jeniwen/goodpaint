@@ -2,6 +2,23 @@
 {%block content%}
 <body>
     <div id="chat-history" style="height:450px" class="overflow-auto" >
+    {% for m in msgs %}
+        <div class="container">
+            <div class="row">
+                <div align="right" class="col my-auto">{{m.hndle}}</div>
+                {% if m.is_me %}
+                <div class="card text-white bg-primary col-md-10">
+                {% else %}
+                <div class="card col-md-10">
+                {% endif %}
+                    <div class="card-body">
+                        <div class="col ml-auto"> {{m.msg}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div align="right"><small>{{m.timestamp}} </small></div></br>
+    {% endfor %}
     </div>
     {% comment %} <textarea id="chat-log" cols="100" rows="20" readonly></textarea><br/> {% endcomment %}
     <input id="chat-message-input" type="text" size="100"/><br/>
@@ -10,11 +27,12 @@
 </body>
 
 <script>
+    
     var roomName = "{{ room_name }}";
     console.log('ws://' + window.location.host + '/ws/chat/' + roomName + '/')
     var chatSocket = new WebSocket(
         'ws://' + window.location.host + '/ws/chat/' + roomName + '/');
-
+    
    chatSocket.onmessage = function(e) {
         var data = JSON.parse(e.data);
         var message = data['message'];
@@ -22,15 +40,17 @@
         var handle = data['handle'];
 
         //document.getElementById('chat-log').value += (message + '<br/>\n' + timestamp+ '\n');
-        /*var divstring = ""
-        if (handle.equals("{{room_name}}")) {
-            divstring = '<div class="card text-white bg-primary"><div class="card-body"><div class="row">'
+        var divstring = ""
+        if (String(handle) === String(roomName)) {
+            divstring = '<div class="card text-white bg-primary col-md-10">'
+            console.log('lol')
         } else {
-            divstring = '<div class="card text-white bg-primary"><div class="card-body"><div class="row">'
-        }*/
+            divstring = '<div class="card col-md-10">'
+        }
        $("#chat-history").append('<div class="container"><div class="row">'
        +'<div align="right" class="col my-auto">' + handle + '</div>'
-       + '<div class="card text-white bg-primary col-md-10"><div class="card-body">'
+       + divstring
+       +'<div class="card-body">'
             + '<div class="col ml-auto">' + message + '</div>' 
         + '</div></div>' 
         +'</div></div>'
@@ -49,6 +69,7 @@
             document.getElementById('chat-message-submit').click();
         }
     };
+    
 
     document.getElementById('chat-message-submit').onclick = function(e) {
         var messageInputDom = document.getElementById('chat-message-input');
@@ -64,4 +85,5 @@
         messageInputDom.value = '';
     };
 </script>
+
 {%endblock%}

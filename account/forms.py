@@ -2,6 +2,8 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 class SignupForm(forms.Form):
+    error_css_class = 'error'
+    required_css_class = 'required'
     username = forms.CharField( 
       # error_messages={'required': 'Gotta make a username!'}
     )
