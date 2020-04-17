@@ -21,7 +21,7 @@ class Listing(models.Model):
     dimensions2 = models.DecimalField(max_digits=5, decimal_places=2)
     unit = models.CharField(max_length=7)
     image = models.ImageField(upload_to=get_upload_path)
-    descrip = models.CharField(max_length=10000)
+    descrip = models.CharField(max_length=10000, blank=True)
     stock = models.IntegerField(validators=[validate_gt_zero])
     created = models.DateTimeField(auto_now_add=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -31,8 +31,8 @@ class Listing(models.Model):
 
 class ListingEdit(models.Model):
     title = models.CharField(max_length=140)
-    descrip = models.CharField(max_length=10000)
+    descrip = models.CharField(max_length=10000, blank=True)
     # image = models.ImageField(upload_to=get_upload_path)
-    stock = models.IntegerField(validators=[validate_gt_zero])
+    stock = models.IntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     

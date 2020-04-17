@@ -9,13 +9,19 @@
 <div class="col-md-8 offset-md-2">
 <form class="text-center border border-light p-5" action="" method="post" enctype="multipart/form-data">
   {% csrf_token %}
+  {% for error in form.non_field_errors %}
+      <div class="alert alert-danger" role="alert">
+         {{ error|escape }}
+      </div>
+      {% endfor %}
   <input class="form-control mb-4" placeholder="Artwork Title" type="text" name="title" value="{{listing.title}}" />
     {{form.title.errors}}
-  <textarea class="form-control mb-4" type="text" name="descrip">{{listing.descrip}}</textarea>
+    <textarea class="form-control mb-4" value="{{listing.descrip}}" name="descrip" rows="5" cols="30">{{listing.descrip}}</textarea>
+  {% comment %} <textarea class="form-control mb-4" type="text" name="descrip" value="{{listing.descrip}}"></textarea> {% endcomment %}
     {{form.descrip.errors}} 
   <input class="form-control mb-4" placeholder="New Price" type="text" name="price" value="{{listing.price}}"/>
     {{form.price.errors}}
-  <input class="form-control mb-4" placeholder="Stock" type="text" name="stock" value="{{listing.stock}}" />
+  <input class="form-control mb-4" placeholder="Restock" type="text" name="stock" value="0" />
     {{form.stock.errors}}
 <input type="submit" />
 </form>

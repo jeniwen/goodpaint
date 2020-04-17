@@ -24,7 +24,7 @@
 
   {% if user.is_authenticated %}
   {% comment %} <a class="btn btn-default" href="{% url 'listing_edit' pk=p.pk %}">EDIT</a> {% endcomment %}
-  <a type="button" class="btn btn-warning" href="{% url 'listing:listing_edit' pk=p.pk %}">EDIT</a>
+  <a type="button" class="btn btn-warning" href="{% url 'listing:listing_edit' pk=p.pk %}">EDIT/RESTOCK</a>
   <a type="button" class="btn btn-danger" href="{% url 'listing:listing_delete' pk=p.pk %}">DELETE</a>
   {% endif %}
   </div>
