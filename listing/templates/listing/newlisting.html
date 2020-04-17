@@ -1,28 +1,29 @@
 {%extends "listing/base.html"%}
 {%block content%}
-
-<form action="" method="post" enctype="multipart/form-data">
+{{ form.non_field_errors }}
+<div class="col-md-8 offset-md-2">
+<form class="text-center border border-light p-5" action="" method="post" enctype="multipart/form-data">
   {% csrf_token %}
-  {% comment %} {{ form.as_p }} {% endcomment %}
+  <p class="h4 mb-4">Post a New Artwork</p>
   <div>
-    Image: <input type="file" name="image" />
+    <label for="imageinput">Image</label>
+    <input class="form-control mb-4" type="file" name="image" id="imageinput"/>
     {{form.image.errors}}
   <div>
+
+  
   <div>
   
-    Title: <input type="text" name="title" /><br /> 
+    <input class="form-control mb-4" placeholder="Artwork Title" type="text" name="title" />
 
     {{form.title.errors}}
 
-    {% comment %} Description: <input type="text" name="descrip" /><br />  {% endcomment %}
-    Description: <br /> 
-    <textarea name="descrip" rows="10" cols="30">
-    </textarea> <br/>
+    <textarea class="form-control mb-4" placeholder="Description" name="descrip" rows="5" cols="30"></textarea>
     {{form.descrip.errors}}
 
 
-    Medium: 
-    <select id="medium_select" name="medium">
+    <label for="medium_select">Medium</label>
+    <select class="form-control mb-4" id="medium_select" name="medium">
       <option value="Oil">Oil Paint</option>
       <option value="Acrylic">Acrylic Paint</option>
       <option value="Watercolour">Watercolour</option>
@@ -33,25 +34,41 @@
     </select>
     {{form.medium.errors}}
     
-    <br /> 
-    Dimensions: <input type="text" name="dimensions1" /> x <input type="text" name="dimensions2" />
-    <select id="unit_select" name="unit">
+    
+    <div class="form-row">
+    
+    
+    <div class="form-group col-md-5">
+    <label for="dimensionsinput1">Width</label><br/>
+    <input class="form-control" type="text" name="dimensions1" id="dimensionsinput1"/>
+    </div>
+    <div class="form-group col-md-5">
+    <label for="dimensionsinput2">Height</label><br/>
+    <input class="form-control" type="text" name="dimensions2" id="dimensionsinput2"/>
+    </div>
+    <div class="form-group col-md-2">
+    <label for="unit_select">Units</label>
+    <select class="form-control" id="unit_select" name="unit">
       <option value="cm">cm</option>
       <option value="inches">inches</option>
     </select>
+    </div>
+    </div>
+
+
+    
     {{form.dimensions1.errors}}
     {{form.dimensions2.errors}}
     {{form.unit.errors}}
     <br /> 
-    Price: <input type="text" name="price" /><br /> 
-    {{form.price.errors}}
-    Stock: <input type="text" name="stock" /><br /> 
+    <input class="form-control mb-4" placeholder="Price" type="text" name="price" />
+    <input class="form-control mb-4" placeholder="Quantity" type="text" name="stock" />
     {{form.stock.errors}}
 
   <div>
-  <input type="submit" />
+  <button class="btn btn-info btn-block my-4" type="submit">Post New Artwork</button>
 </form>
 
-
+</div
 
 {%endblock%}

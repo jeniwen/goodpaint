@@ -2,24 +2,36 @@
 {%extends "listing/base.html"%}
 {%block content%}
 
-<h1>Your Listings</h1>
-<a type="button" href='newlisting' class="btn btn-primary btn-block btn-success">New Listing</a>
+<br/>
+
+<div class="col-md-8 offset-md-2">
+  <a type="button" href='/listing/newlisting' class="btn btn-primary btn-block btn-success">New Listing</a><br/>
+</div>
+<h1>Your Current Listings</h1><br/>
 {% for p in my_listings %}
 <p>
+<div class="jumbotron">
+  <div class="container">
+  <div class="row">
   <img src="{{p.image.url}}" /><br /> 
+  <div class="col-6">
+  <h1>{{p.title}}</h2><br/>
   Author: {{p.owner.username}} | {{p.created}}<br />
-  <h1>{{p.title}}</h2>
-  Description: {{p.descrip}} <br /> 
+  Description: {{p.descrip}} <br /> <br/>
   Medium: {{p.medium}}<br /> 
   Stock: {{p.stock}}<br />
   Price: ${{p.price}} <br/>
 
   {% if user.is_authenticated %}
   {% comment %} <a class="btn btn-default" href="{% url 'listing_edit' pk=p.pk %}">EDIT</a> {% endcomment %}
-  <a type="button" class="btn btn-warning" href="{% url 'listing_edit' pk=p.pk %}">EDIT</a>
-  <a type="button" class="btn btn-danger" href="{% url 'listing_delete' pk=p.pk %}">DELETE</a>
-
+  <a type="button" class="btn btn-warning" href="{% url 'listing:listing_edit' pk=p.pk %}">EDIT</a>
+  <a type="button" class="btn btn-danger" href="{% url 'listing:listing_delete' pk=p.pk %}">DELETE</a>
   {% endif %}
+  </div>
+  
+  </div>
+  </div>
+</div>
 </p>
 {% endfor %}
 {% endblock %}

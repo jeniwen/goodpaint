@@ -6,26 +6,21 @@
 {% endfor %}
 
 <h2> Edit your listing </h2>
-
-<form action="" method="post" enctype="multipart/form-data">
+<div class="col-md-8 offset-md-2">
+<form class="text-center border border-light p-5" action="" method="post" enctype="multipart/form-data">
   {% csrf_token %}
-   {% comment %} <div>
-    Image: <input type="file" name="image" />
-    {{form.image.errors}}
-    <div> {% endcomment %}
-  Title: <input type="text" name="title" value={{listing.title}} /><br /> 
+  <input class="form-control mb-4" placeholder="Artwork Title" type="text" name="title" value="{{listing.title}}" />
     {{form.title.errors}}
-  Description: <input type="text" name="descrip" value={{listing.descrip}} /><br />
+  <textarea class="form-control mb-4" type="text" name="descrip">{{listing.descrip}}</textarea>
     {{form.descrip.errors}} 
-  Price: <input type="text" name="price" /><br /> 
+  <input class="form-control mb-4" placeholder="New Price" type="text" name="price" value="{{listing.price}}"/>
     {{form.price.errors}}
-  Stock: <input type="text" name="stock" value={{listing.stock}} /><br /> 
+  <input class="form-control mb-4" placeholder="Stock" type="text" name="stock" value="{{listing.stock}}" />
     {{form.stock.errors}}
 <input type="submit" />
-  
-
-  
 </form>
+</div>
+
 
 
 

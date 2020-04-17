@@ -7,6 +7,16 @@ from .models import ListingEdit
 from .forms import ListingPostFormEdit
 from django.http import Http404
 from django.shortcuts import get_object_or_404
+from django.views import generic
+
+class MyListingsIndexView(generic.ListView):
+    template_name = 'listing/mylistings'
+    context_object_name = 'all_listings'
+
+    def get_queryset(self):
+        return Listing.objects.filter(owner=request.user)
+
+
 
 @login_required
 def newlisting(request):
@@ -18,7 +28,7 @@ def newlisting(request):
             inst = form.save(commit=False)
             inst.owner = request.user
             inst.save()
-            return redirect('/listing/mylistings')
+            return redirect('listing:mylistings')
 
         context['form'] = form
     # for item in Listing.objects.all():
@@ -87,4 +97,5 @@ def listing_edit(request,pk):
 def listing_delete(request, pk):
     listing = get_object_or_404(Listing, pk=pk)
     listing.delete()
-    return redirect('/listing/mylistings')
+    return redirect('listing:mylistings')
+

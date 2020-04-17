@@ -1,11 +1,13 @@
 {%extends "listing/base.html"%}
 {%block content%}
-
+<div class="col-md-8 offset-md-2">
+<br/>
 <form action="" method="post" enctype="multipart/form-data">
 
-Subtotal: $ {{ order.get_cart_total|floatformat:"2" }} <br/>
-Tax: $ {{ order.get_tax_total|floatformat:"2" }} <br/>
-Grand total: $ {{ order.get_grand_total|floatformat:"2" }} <br/>
+<h5>Subtotal: $ {{ order.get_cart_total|floatformat:"2" }}</h5>
+<h6>Tax: $ {{ order.get_tax_total|floatformat:"2" }}</h6>
+<h3>Grand total: $ {{ order.get_grand_total|floatformat:"2" }}</h3>
+
 {% csrf_token %}
 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="{{ key }}"
@@ -15,10 +17,9 @@ Grand total: $ {{ order.get_grand_total|floatformat:"2" }} <br/>
 </script>
 </form>
 
-<form action="" method="post" id="payment-form">
+<form class="text-center border border-light p-5" action="" method="post" id="payment-form">
   <div class="form-row">
     <label for="card-element">
-      Credit or debit card
     </label>
     <div id="card-element">
       <!-- A Stripe Element will be inserted here. -->
@@ -28,7 +29,6 @@ Grand total: $ {{ order.get_grand_total|floatformat:"2" }} <br/>
     <div id="card-errors" role="alert"></div>
   </div>
 
-  <button>Submit Payment</button>
 </form>
-
+</div>
 {%endblock%}

@@ -5,9 +5,14 @@
 <!doctype html>
 <html>
 <body>
-  <a type="button" href='/listing/newlisting' class="btn btn-primary btn-block btn-success">New Listing</a>
-  <div class="container">
+  </br>
+  <div class="col-md-8 offset-md-2">
+  <a type="button" href='/listing/newlisting' class="btn btn-primary btn-block btn-success">New Listing</a><br/>
+  </div>
 
+
+
+  <div class="container">
   <div class="card-columns">
   {% for p in all_listings %}
     <div class="card">
@@ -19,7 +24,7 @@
     <p class="card-text"><small class="text-muted">
     Artist: {{p.owner.username}} | {{p.created}}
     </p></small>
-    <a type="button" class="btn btn-info" href="{% url 'listing_detail' pk=p.pk %}">View Details</a>
+    <a type="button" class="btn btn-info btn-block" href="{% url 'listing_detail' pk=p.pk %}">View Details</a>
     </div>
     </div>
 
