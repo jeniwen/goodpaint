@@ -22,7 +22,6 @@ def seelistings(request):
 def listing_detail(request, pk):
     listing =  get_object_or_404(Listing, pk=pk)
     context = {'listing': listing }
-    print('listing')
     if (request.method == 'POST'):
         print('post')
         form = AddToCartForm(request.POST)
