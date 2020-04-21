@@ -133,25 +133,19 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
+# I used https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 import os.path
 
 STATIC_ROOT = ''
-
 STATIC_URL = '/static/'
-
-# STATICFILES_DIRS = ( os.path.join('static'), )
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     os.path.join(BASE_DIR, "common_static"),
     'marketplace/static/',
 ]
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/Users/jiawen/Pictures/media'
-
-
+MEDIA_ROOT = '/Users/jiawen/Pictures/media' #*****************CHANGE ME*********************
 
 STRIPE_SECRET_KEY = 'sk_test_Sq2YIidJbajZcET976OJ5Whc00yoOIu5j1'
 STRIPE_PUBLISHABLE_KEY = 'pk_test_QUCczclxvrFQLkxzedpRqs1T00VFOIDDwu'

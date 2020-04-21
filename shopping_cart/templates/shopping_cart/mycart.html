@@ -33,7 +33,16 @@ Order # {{order_num}} <br/>
 {% endfor %}
 </ul>
 <br/>
-<h2>Subtotal: {{total}} CAD </h2><br/>
+{% if total %}
+<h4>Subtotal: {{total|floatformat:"2"}} CAD </h4>
+{% endif %}
+{% if taxtotal %}
+<h5>Tax total: {{taxtotal|floatformat:"2"}} CAD </h5>
+{% endif %}
+{% if grandtotal %}
+<h3>Grand total: {{grandtotal|floatformat:"2"}} CAD </h3><br/>
+{% endif %}
+
 {% if order_num %}
 
 {% if currentcart %}

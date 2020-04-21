@@ -36,6 +36,9 @@ def pastorders_view(request, ref_code):
     user_order = get_object_or_404(Order, owner=user, ref_code=ref_code)
     context['user_order'] = user_order.items.all()
     context['total'] = user_order.get_cart_total()
+    context['taxtotal'] = user_order.get_tax_total()
+    context['grandtotal'] = user_order.get_grand_total()
+
     context['order_num'] = user_order.ref_code
     context['user'] = request.user
     
@@ -66,7 +69,6 @@ def pastorders(request):
 def addtocart(request, pk):
     context = {}
     
-    # print('hello ' + str(request.session['quantity']) + " " + str(pk))
 
     #Start building OrderItem
     user = get_object_or_404(User, username=request.user)
